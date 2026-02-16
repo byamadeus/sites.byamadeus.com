@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-noto-sans);
+}
+
+body {
+  color: #ededed;
+  font-family: Noto Sans, Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  min-height: 100vh;
+  background: #1a1a2e;
+}
