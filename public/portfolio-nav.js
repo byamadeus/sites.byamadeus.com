@@ -36,7 +36,7 @@ class PNav extends HTMLElement {
 			<style>${PNav.styles}</style>
 			<div class="pnav" aria-label="Portfolio navigation">
 				<div class="pnav-track">
-					<span class="pnav-pill">byamadeus.com</span>
+					<span class="pnav-pill">sites.byamadeus.com</span>
 					<div class="pnav-items">${items}</div>
 				</div>
 			</div>
