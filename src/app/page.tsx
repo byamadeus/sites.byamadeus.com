@@ -41,9 +41,9 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <SiteCard 
             href="#"
-              title="Film Your Why Studios"
+              title="Blais Cameron Films"
               description="Portfolio site for a film studio."
-              variant="wip"
+              variant="default"
             />
             <SiteCard 
             href="#"
