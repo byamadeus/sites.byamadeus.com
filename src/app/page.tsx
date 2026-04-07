@@ -5,6 +5,7 @@ import BlitzText from '@/components/BlitzText';
 import { SiteCard } from '@/components/SiteCard';
 import { ContactForm } from '@/components/ContactForm';
 import { Footer } from '@/components/Footer';
+import { YarndingBox } from '@/components/YarndingBox';
 
 export default function Home() {
   return (
@@ -40,7 +41,7 @@ export default function Home() {
         <section className="flex w-full max-w-[800px] flex-col gap-8 px-6 py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <SiteCard 
-            href="#"
+            href="https://www.blaiscameron.com/"
               title="Blais Cameron Films"
               description="Portfolio site for a film studio."
               variant="default"
@@ -82,12 +83,7 @@ export default function Home() {
         {/* Contact Section */}
         <section className="flex w-full max-w-[800px] flex-col gap-8 px-6 py-16">
           <h2 className="text-2xl text-center text-white/90">What could your site be?</h2>
-          <SiteCard
-              href="https://launch-comotion2024.byamadeus.com/"
-              title="2024 SCAD CoMotion"
-              description="Brief description of the project."
-              variant="empty"
-            />
+          <YarndingBox />
           
           {/* <div className="rounded-xl border border-white/20 bg-white/5 p-8 backdrop-blur-sm">
             <ContactForm />
