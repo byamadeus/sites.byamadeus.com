@@ -10,12 +10,13 @@ interface Site {
   title: string;
   description: string;
   preview?: string | null;
+  muxId?: string | null;
   tags?: string[];
 }
 
 const GAP = 16;
 const CARD_W = "80vw";
-const INTERVAL = 3800;
+const INTERVAL = 5000;
 const SPRING = "0.62s cubic-bezier(0.22, 1, 0.36, 1)";
 const DRAG_THRESHOLD = 50;
 const VEL_THRESHOLD  = 0.25;
@@ -24,10 +25,12 @@ export function SiteCarousel({ sites }: { sites: Site[] }) {
   const n = sites.length;
   const cloned = [sites[n - 1], ...sites, sites[0]];
 
-  const [idx, setIdx]           = useState(1);
-  const [animated, setAnimated] = useState(true);
+  const [idx, setIdx]             = useState(1);
+  const [animated, setAnimated]   = useState(true);
   const [dragOffset, setDragOffset] = useState(0);
-  const [dragging, setDragging] = useState(false);
+  const [dragging, setDragging]   = useState(false);
+  // Increments on every user interaction → resets timer bar animation via key
+  const [timerKey, setTimerKey]   = useState(0);
 
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const startX   = useRef(0);
@@ -40,6 +43,7 @@ export function SiteCarousel({ sites }: { sites: Site[] }) {
     timerRef.current = setInterval(() => {
       setAnimated(true);
       setIdx((i) => i + 1);
+      setTimerKey((k) => k + 1);
     }, INTERVAL);
   }, []);
 
@@ -49,27 +53,28 @@ export function SiteCarousel({ sites }: { sites: Site[] }) {
   }, [resetTimer]);
 
   const onTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
-    // Only handle the track's own transform — ignore bubbled child events
     if (e.target !== e.currentTarget || e.propertyName !== "transform") return;
-
     if (idx === n + 1 || idx === 0) {
       const jumpTo = idx === n + 1 ? 1 : n;
-      // flushSync guarantees transition:none is committed to DOM before idx changes
       flushSync(() => {
         setAnimated(false);
         setIdx(jumpTo);
       });
-      // Re-arm animation for the next real slide
       requestAnimationFrame(() => setAnimated(true));
     }
   };
 
   const realIdx = idx <= 0 ? n - 1 : idx >= n + 1 ? 0 : idx - 1;
 
+  const bumpTimer = () => {
+    setTimerKey((k) => k + 1);
+    resetTimer();
+  };
+
   const goTo = (i: number) => {
     setAnimated(true);
     setIdx(i + 1);
-    resetTimer();
+    bumpTimer();
   };
 
   // ── Drag ────────────────────────────────────────────────────────────────
@@ -77,9 +82,9 @@ export function SiteCarousel({ sites }: { sites: Site[] }) {
     e.currentTarget.setPointerCapture(e.pointerId);
     setDragging(true);
     setAnimated(false);
-    startX.current  = e.clientX;
-    lastX.current   = e.clientX;
-    lastT.current   = Date.now();
+    startX.current   = e.clientX;
+    lastX.current    = e.clientX;
+    lastT.current    = Date.now();
     velocity.current = 0;
     if (timerRef.current) clearInterval(timerRef.current);
   };
@@ -105,19 +110,18 @@ export function SiteCarousel({ sites }: { sites: Site[] }) {
     } else if (velocity.current > VEL_THRESHOLD || offset > DRAG_THRESHOLD) {
       setIdx((i) => i - 1);
     }
-    resetTimer();
+    bumpTimer();
   };
 
-  // Live scale interpolation while dragging
   const cardPx = typeof window !== "undefined" ? window.innerWidth * 0.8 + GAP : 700;
   const dragProgress = Math.max(-1, Math.min(1, dragOffset / cardPx));
 
   const scaleFor = (i: number) => {
-    if (!animated && !dragging) return i === idx ? 1 : 0.88; // jump frame — snap immediately
+    if (!animated && !dragging) return i === idx ? 1 : 0.88;
     if (dragging) {
-      if (i === idx)      return 1 - 0.12 * Math.abs(dragProgress);
-      if (i === idx + 1 && dragProgress < 0) return 0.88 + 0.12 * Math.abs(dragProgress);
-      if (i === idx - 1 && dragProgress > 0) return 0.88 + 0.12 * Math.abs(dragProgress);
+      if (i === idx)                            return 1 - 0.12 * Math.abs(dragProgress);
+      if (i === idx + 1 && dragProgress < 0)    return 0.88 + 0.12 * Math.abs(dragProgress);
+      if (i === idx - 1 && dragProgress > 0)    return 0.88 + 0.12 * Math.abs(dragProgress);
       return 0.88;
     }
     return i === idx ? 1 : 0.88;
@@ -161,7 +165,10 @@ export function SiteCarousel({ sites }: { sites: Site[] }) {
                 title={site.title}
                 description={site.description}
                 previewSrc={site.preview ?? undefined}
+                muxId={site.muxId ?? undefined}
                 tags={site.tags}
+                isActive={i === idx}
+                timerKey={i === idx ? timerKey : -1}
                 variant="default"
               />
             </div>

@@ -4,19 +4,26 @@ interface SiteCardProps {
   description?: string;
   previewSrc?: string;
   preview?: React.ReactNode;
+  muxId?: string;
   tags?: string[];
+  isActive?: boolean;
+  timerKey?: number;
   variant?: "default" | "empty" | "wip";
 }
 
 import { SquareArrowOutUpRight, Hammer } from 'lucide-react';
 import { useState } from 'react';
+import { SiteCardVideo } from './SiteCardVideo';
 
 export function SiteCard({
   href,
   title,
   description,
   previewSrc,
+  muxId,
   tags = [],
+  isActive,
+  timerKey,
   variant = "default",
 }: SiteCardProps) {
   const isEmpty = variant === "empty";
@@ -45,13 +52,27 @@ export function SiteCard({
           </div>
         ) : (
           <div
-            className={`rounded-2xl border border-white/20 bg-white/5 backdrop-blur-sm transition overflow-hidden ${
+            className={`relative rounded-2xl border border-white/20 bg-white/5 backdrop-blur-sm transition overflow-hidden ${
               isWip ? "hover:opacity-50" : "hover:bg-white/10"
             }`}
           >
+            {/* Timer bar — shrinks left-to-right over 5s, resets on interaction */}
+            {isActive && timerKey !== undefined && (
+              <div className="absolute inset-x-0 top-0 h-[2px] z-20 bg-white/10">
+                <div key={timerKey} className="card-timer h-full w-full bg-white/50" />
+              </div>
+            )}
+
             {!isWip && (
-              <div className="w-full aspect-video bg-white/5 overflow-hidden">
-                {previewSrc ? (
+              <div className="relative w-full aspect-video bg-white/5 overflow-hidden">
+                {muxId ? (
+                  <SiteCardVideo
+                    playbackId={muxId}
+                    previewSrc={previewSrc}
+                    alt={title}
+                    isActive={isActive}
+                  />
+                ) : previewSrc ? (
                   <img
                     src={previewSrc}
                     alt={title}

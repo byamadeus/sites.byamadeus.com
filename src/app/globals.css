@@ -11,3 +11,18 @@ body {
   min-height: 100vh;
   background: #1a1a2e;
 }
+
+/* Hide Mux player chrome */
+mux-player {
+  --controls: none;
+}
+
+/* Card timer bar */
+@keyframes timer-shrink {
+  from { transform: scaleX(1); }
+  to   { transform: scaleX(0); }
+}
+.card-timer {
+  transform-origin: left;
+  animation: timer-shrink 5s linear forwards;
+}

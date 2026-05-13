@@ -1,4 +1,5 @@
 // Add new sites here. status: "done" = show card, "in-progress" = hidden (tracked only)
+// muxId: Mux playback ID — shows looping video preview with image crossfade
 export const sites = [
   {
     slug: "blais",
@@ -6,6 +7,7 @@ export const sites = [
     title: "Blais Cameron Films",
     description: "Portfolio for a film studio.",
     preview: "/assets/previews/blais.jpg",
+    muxId: "I6DUXZ2MJ3E801MUk021jQkAFPixNrzHiCm5cKDyBHVe8",
     tags: ["NEXT.JS", "RAPID PROJECT"],
     status: "done",
   },
@@ -15,6 +17,7 @@ export const sites = [
     title: "Sam's Cybersecurity",
     description: "A site for a small cybersecurity business.",
     preview: null,
+    muxId: null,
     tags: [],
     status: "in-progress",
   },
@@ -24,6 +27,7 @@ export const sites = [
     title: "2024 SCAD CoMotion",
     description: "SCAD's annual motion design conference.",
     preview: "/assets/previews/comotion-2024.png",
+    muxId: "HYtqQsn4L101XtM2Au1U3lHf2rFJw7AWbZFBmBEjQscU",
     tags: ["EVENT SITE", "WEBFLOW"],
     status: "done",
   },
@@ -33,6 +37,7 @@ export const sites = [
     title: "2024 SCAD StartUp",
     description: "SCAD's annual startup pitch competition.",
     preview: "/assets/previews/startup-2024.png",
+    muxId: "IUMwDO7CvFuk46VS6YfKPFFslJSeh02aNBafu7H01pbPQ",
     tags: ["EVENT SITE", "WEBFLOW"],
     status: "done",
   },
@@ -42,6 +47,7 @@ export const sites = [
     title: "2023 SCAD CoMotion",
     description: "SCAD's annual motion design conference.",
     preview: "/assets/previews/comotion-2023.png",
+    muxId: "x00bt00HC4hS1bUhgAXxw02802OYem4olu1DlD5gLnmoMcQ",
     tags: ["EVENT SITE", "WEBFLOW"],
     status: "done",
   },
@@ -51,6 +57,7 @@ export const sites = [
     title: "2023 SCAD StartUp",
     description: "SCAD's annual startup pitch competition.",
     preview: "/assets/previews/startup-2023.png",
+    muxId: "1MWKPIAygt4sltPshD1vS01LJApBAhBabqAd2nj1W7O8",
     tags: ["EVENT SITE", "WEBFLOW", "RAPID PROJECT"],
     status: "done",
   },

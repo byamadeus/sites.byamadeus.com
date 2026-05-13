@@ -40,7 +40,7 @@ function EmailRow({ onCopy, copied }: { onCopy: () => void; copied: boolean }) {
         onClick={onCopy}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="flex items-center gap-3 w-full px-5 py-4 rounded-2xl border border-white/10 text-white/80 hover:text-white hover:border-white/20 transition-all duration-200 active:scale-95 cursor-pointer"
+        className="flex items-center gap-3 w-full md:w-auto px-5 py-4 rounded-2xl border border-white/10 text-white/80 hover:text-white hover:border-white/20 transition-all duration-200 active:scale-95 cursor-pointer"
         style={{ background: "rgba(255,255,255,0.07)" }}
       >
         <IconEmail />
@@ -144,19 +144,19 @@ export function ContactDrawer() {
             <div className="w-10 h-1 rounded-full bg-white/20" />
           </div>
 
-          <div className="flex flex-col items-center gap-6 px-8 py-8 pb-12 max-w-sm mx-auto">
-            <p className="text-white/80 text-lg text-center leading-relaxed">
+          <div className="flex flex-col md:flex-row md:items-center gap-6 px-8 py-8 pb-12 max-w-2xl mx-auto w-full">
+            <p className="text-white/80 text-lg text-center md:text-left leading-relaxed md:flex-1 md:whitespace-nowrap">
               Let&apos;s make something together.
             </p>
 
-            <div className="flex flex-col gap-3 w-full">
+            <div className="flex flex-col md:flex-row gap-3 w-full md:w-auto">
               <EmailRow onCopy={copyEmail} copied={copied} />
 
               <a
                 href={LINKEDIN_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 w-full px-5 py-4 rounded-2xl border border-white/10 text-white/80 hover:text-white hover:border-white/20 transition-all duration-200 active:scale-95"
+                className="flex items-center gap-3 md:w-auto w-full px-5 py-4 rounded-2xl border border-white/10 text-white/80 hover:text-white hover:border-white/20 transition-all duration-200 active:scale-95"
                 style={{ background: "rgba(255,255,255,0.07)" }}
               >
                 <IconLinkedIn />
@@ -167,7 +167,7 @@ export function ContactDrawer() {
                 href={INSTAGRAM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 w-full px-5 py-4 rounded-2xl border border-white/10 text-white/80 hover:text-white hover:border-white/20 transition-all duration-200 active:scale-95"
+                className="flex items-center gap-3 md:w-auto w-full px-5 py-4 rounded-2xl border border-white/10 text-white/80 hover:text-white hover:border-white/20 transition-all duration-200 active:scale-95"
                 style={{ background: "rgba(255,255,255,0.07)" }}
               >
                 <IconInstagram />
