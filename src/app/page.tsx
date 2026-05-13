@@ -2,9 +2,10 @@
 
 import { Nav } from '@/components/Nav';
 import BlitzText from '@/components/BlitzText';
-import { SiteCard } from '@/components/SiteCard';
+import { SiteCarousel } from '@/components/SiteCarousel';
 import { Footer } from '@/components/Footer';
 import { YarndingBox } from '@/components/YarndingBox';
+import { ContactDrawer } from '@/components/ContactDrawer';
 import { sites } from '@sites';
 
 export default function Home() {
@@ -29,20 +30,9 @@ export default function Home() {
           </div>
         </header>
 
-        {/* Sites Section */}
-        <section className="flex w-full max-w-[800px] flex-col gap-8 px-6 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {visibleSites.map((site) => (
-              <SiteCard
-                key={site.slug}
-                href={site.href ?? undefined}
-                title={site.title}
-                description={site.description}
-                previewSrc={site.preview ?? undefined}
-                variant="default"
-              />
-            ))}
-          </div>
+        {/* Sites Section — full viewport width so peeking cards aren't clipped */}
+        <section className="flex w-full flex-col gap-8 py-16 overflow-hidden">
+          <SiteCarousel sites={visibleSites} />
         </section>
 
         {/* Contact Section */}
@@ -53,6 +43,7 @@ export default function Home() {
 
         <Footer />
       </div>
+      <ContactDrawer />
     </main>
     </>
   );

@@ -4,6 +4,7 @@ interface SiteCardProps {
   description?: string;
   previewSrc?: string;
   preview?: React.ReactNode;
+  tags?: string[];
   variant?: "default" | "empty" | "wip";
 }
 
@@ -15,6 +16,7 @@ export function SiteCard({
   title,
   description,
   previewSrc,
+  tags = [],
   variant = "default",
 }: SiteCardProps) {
   const isEmpty = variant === "empty";
@@ -24,7 +26,7 @@ export function SiteCard({
   const Wrapper = isEmpty || isWip ? "div" : "a";
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <Wrapper
         {...(!isEmpty && !isWip && {
           href,
@@ -36,14 +38,14 @@ export function SiteCard({
         className={isWip ? "cursor-not-allowed" : ""}
       >
         {isEmpty ? (
-          <div className="rounded-xl border-2 border-white/20 border-dashed bg-white/5 backdrop-blur-sm transition hover:bg-white/10 overflow-hidden">
+          <div className="rounded-2xl border-2 border-white/20 border-dashed bg-white/5 backdrop-blur-sm transition hover:bg-white/10 overflow-hidden">
             <div className="flex flex-col items-center justify-center aspect-video text-white/30">
               <p className="text-sm">What will your site be?</p>
             </div>
           </div>
         ) : (
           <div
-            className={`rounded-xl border border-white/20 bg-white/5 backdrop-blur-sm transition overflow-hidden ${
+            className={`rounded-2xl border border-white/20 bg-white/5 backdrop-blur-sm transition overflow-hidden ${
               isWip ? "hover:opacity-50" : "hover:bg-white/10"
             }`}
           >
@@ -61,12 +63,26 @@ export function SiteCard({
               </div>
             )}
 
-            <div className="flex w-full flex-row p-6 justify-between items-center">
-              <div>
+            <div className="flex w-full flex-row p-6 justify-between items-start gap-4">
+              <div className="flex flex-col gap-2 min-w-0">
                 <p className="text-lg text-white/90 font-medium">{title}</p>
-                <p className="text-sm text-white/50 mt-2">{description}</p>
+                <p className="text-sm text-white/50">{description}</p>
+                {tags.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5 mt-1">
+                    {tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[10px] font-semibold tracking-widest uppercase px-2 py-0.5 rounded-full border border-white/15 text-white/40"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
-              {isWip ? <Hammer /> : <SquareArrowOutUpRight />}
+              <div className="shrink-0 mt-0.5">
+                {isWip ? <Hammer size={16} className="text-white/40" /> : <SquareArrowOutUpRight size={16} className="text-white/40" />}
+              </div>
             </div>
           </div>
         )}
