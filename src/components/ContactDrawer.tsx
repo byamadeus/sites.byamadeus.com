@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { Wand2 } from "lucide-react";
 
 const EMAIL = "design.byamadeus@gmail.com";
 const LINKEDIN_URL = "https://www.linkedin.com/in/amadeuscameron/";
@@ -40,7 +41,7 @@ function EmailRow({ onCopy, copied }: { onCopy: () => void; copied: boolean }) {
         onClick={onCopy}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="flex items-center gap-3 w-full md:w-auto px-5 py-4 rounded-2xl border border-white/10 text-white/80 hover:text-white hover:border-white/20 transition-all duration-200 active:scale-95 cursor-pointer"
+        className="flex items-center gap-3 px-5 py-4 rounded-2xl border border-white/10 text-white/80 hover:text-white hover:border-white/20 transition-all duration-200 active:scale-95 cursor-pointer"
         style={{ background: "rgba(255,255,255,0.07)" }}
       >
         <IconEmail />
@@ -92,11 +93,8 @@ export function ContactDrawer() {
 
   return (
     <>
-      {/* Trigger pill */}
-      <div
-        className="fixed z-[9998]"
-        style={{ bottom: "32px", left: "50%", transform: "translateX(-50%)" }}
-      >
+      {/* Trigger pill — bottom right */}
+      <div className="fixed z-[9998]" style={{ bottom: "32px", right: "24px" }}>
         <button
           onClick={() => setOpen(true)}
           className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-white/90 border border-white/20 transition-all duration-200 active:scale-95 cursor-pointer"
@@ -106,6 +104,7 @@ export function ContactDrawer() {
             WebkitBackdropFilter: "blur(12px)",
           }}
         >
+          <Wand2 size={14} className="text-white/70" />
           Reach out
         </button>
       </div>
@@ -144,19 +143,19 @@ export function ContactDrawer() {
             <div className="w-10 h-1 rounded-full bg-white/20" />
           </div>
 
-          <div className="flex flex-col md:flex-row md:items-center gap-6 px-8 py-8 pb-12 max-w-2xl mx-auto w-full">
-            <p className="text-white/80 text-lg text-center md:text-left leading-relaxed md:flex-1 md:whitespace-nowrap">
+          <div className="flex flex-col items-center gap-6 px-8 py-8 pb-12 max-w-2xl mx-auto w-full">
+            <p className="text-white/80 text-lg text-center leading-relaxed">
               Let&apos;s make something together.
             </p>
 
-            <div className="flex flex-col md:flex-row gap-3 w-full md:w-auto">
+            <div className="flex flex-row flex-wrap justify-center gap-3">
               <EmailRow onCopy={copyEmail} copied={copied} />
 
               <a
                 href={LINKEDIN_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 md:w-auto w-full px-5 py-4 rounded-2xl border border-white/10 text-white/80 hover:text-white hover:border-white/20 transition-all duration-200 active:scale-95"
+                className="flex items-center gap-3 px-5 py-4 rounded-2xl border border-white/10 text-white/80 hover:text-white hover:border-white/20 transition-all duration-200 active:scale-95"
                 style={{ background: "rgba(255,255,255,0.07)" }}
               >
                 <IconLinkedIn />
@@ -167,7 +166,7 @@ export function ContactDrawer() {
                 href={INSTAGRAM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 md:w-auto w-full px-5 py-4 rounded-2xl border border-white/10 text-white/80 hover:text-white hover:border-white/20 transition-all duration-200 active:scale-95"
+                className="flex items-center gap-3 px-5 py-4 rounded-2xl border border-white/10 text-white/80 hover:text-white hover:border-white/20 transition-all duration-200 active:scale-95"
                 style={{ background: "rgba(255,255,255,0.07)" }}
               >
                 <IconInstagram />
