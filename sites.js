@@ -1,0 +1,51 @@
+// Add new sites here. status: "done" = show card, "in-progress" = hidden (tracked only)
+export const sites = [
+  {
+    slug: "blais",
+    href: "https://www.blaiscameron.com/",
+    title: "Blais Cameron Films",
+    description: "Portfolio site for a film studio.",
+    preview: "/assets/previews/blais.jpg",
+    status: "done",
+  },
+  {
+    slug: "sams-cybersecurity",
+    href: null,
+    title: "Sam's Cybersecurity",
+    description: "A site for a small cybersecurity business.",
+    preview: null,
+    status: "in-progress",
+  },
+  {
+    slug: "comotion-2024",
+    href: "https://launch-comotion2024.byamadeus.com/",
+    title: "2024 SCAD CoMotion",
+    description: "An event site for CoMotion 2024.",
+    preview: "/assets/previews/comotion-2024.png",
+    status: "done",
+  },
+  {
+    slug: "startup-2024",
+    href: "https://2024-startup.byamadeus.com/",
+    title: "2024 SCAD StartUp",
+    description: "An event site for StartUp 2024.",
+    preview: "/assets/previews/startup-2024.png",
+    status: "done",
+  },
+  {
+    slug: "comotion-2023",
+    href: "https://comotion-2023.vercel.app/",
+    title: "2023 SCAD CoMotion",
+    description: "An event site for CoMotion 2023.",
+    preview: "/assets/previews/comotion-2023.png",
+    status: "done",
+  },
+  {
+    slug: "startup-2023",
+    href: "https://2023-startup.byamadeus.com/",
+    title: "2023 SCAD StartUp",
+    description: "An event site for StartUp 2023.",
+    preview: "/assets/previews/startup-2023.png",
+    status: "done",
+  },
+];

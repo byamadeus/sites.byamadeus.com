@@ -2,6 +2,7 @@ interface SiteCardProps {
   href?: string;
   title?: string;
   description?: string;
+  previewSrc?: string;
   preview?: React.ReactNode;
   variant?: "default" | "empty" | "wip";
 }
@@ -13,7 +14,7 @@ export function SiteCard({
   href,
   title,
   description,
-  preview,
+  previewSrc,
   variant = "default",
 }: SiteCardProps) {
   const isEmpty = variant === "empty";
@@ -41,29 +42,36 @@ export function SiteCard({
             </div>
           </div>
         ) : (
-          <div 
+          <div
             className={`rounded-xl border border-white/20 bg-white/5 backdrop-blur-sm transition overflow-hidden ${
-              isWip 
-                ? "hover:opacity-50" 
-                : "hover:bg-white/10"
+              isWip ? "hover:opacity-50" : "hover:bg-white/10"
             }`}
           >
-            <div className='flex w-full flex-row p-6 justify-between items-center'>
+            {!isWip && (
+              <div className="w-full aspect-video bg-white/5 overflow-hidden">
+                {previewSrc ? (
+                  <img
+                    src={previewSrc}
+                    alt={title}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-white/10" />
+                )}
+              </div>
+            )}
+
+            <div className="flex w-full flex-row p-6 justify-between items-center">
               <div>
                 <p className="text-lg text-white/90 font-medium">{title}</p>
                 <p className="text-sm text-white/50 mt-2">{description}</p>
               </div>
-              {isWip ? (
-                <Hammer/>
-              ) : (
-                <SquareArrowOutUpRight />
-              )}
+              {isWip ? <Hammer /> : <SquareArrowOutUpRight />}
             </div>
           </div>
         )}
       </Wrapper>
 
-      {/* WIP Tooltip */}
       {isWip && showTooltip && (
         <div className="absolute left-1/2 -translate-x-1/2 z-50 pointer-events-none">
           <div className="rounded-lg border border-yellow-500/50 bg-yellow-500/10 backdrop-blur-md px-4 py-2 shadow-lg overflow-hidden w-48">
