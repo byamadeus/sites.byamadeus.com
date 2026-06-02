@@ -12,6 +12,16 @@ export const sites = [
     status: "done",
   },
   {
+    slug: "project96",
+    href: "https://www.project96.com/",
+    title: "Project 96",
+    description: "Diaspora World Cup activation series, NYC 2026.",
+    preview: "/assets/previews/project96.png",
+    muxId: null,
+    tags: ["EVENT SITE", "NEXT.JS"],
+    status: "done",
+  },
+  {
     slug: "sams-cybersecurity",
     href: null,
     title: "Sam's Cybersecurity",
